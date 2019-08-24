@@ -4,7 +4,7 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-
+UWP/
 # Visual Studio cache directory
 .vs/
 
@@ -34,3 +34,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+MatVis/Assets/Resources/VuforiaConfiguration.asset
+MatVis/Assets/Resources/VuforiaConfiguration.asset.meta
