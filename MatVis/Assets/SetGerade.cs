@@ -3,22 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-public class SetPlane : MonoBehaviour
+public class SetGerade : MonoBehaviour
 {
     public Vector3 Position;
-    public Vector3 Normale;
+    public Vector3 Richtung;
     public Transform planetransform;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void setposX(string x)
     {
@@ -34,22 +23,22 @@ public class SetPlane : MonoBehaviour
     }
     public void setNormX(string x)
     {
-        Normale.x = float.Parse(x, CultureInfo.InvariantCulture);
+        Richtung.x = float.Parse(x, CultureInfo.InvariantCulture);
     }
     public void setNormY(string y)
     {
-        Normale.y = float.Parse(y, CultureInfo.InvariantCulture);
+        Richtung.y = float.Parse(y, CultureInfo.InvariantCulture);
     }
     public void setNormZ(string z)
     {
-        Normale.z = float.Parse(z, CultureInfo.InvariantCulture);
+        Richtung.z = float.Parse(z, CultureInfo.InvariantCulture);
     }
 
 
     public void settransform()
     {
         planetransform.position = Position;
-        Quaternion rotation = Quaternion.FromToRotation(new Vector3(0, 1, 0), Normale);
+        Quaternion rotation = Quaternion.FromToRotation(new Vector3(0, 0, 1), Richtung);
         planetransform.rotation = rotation;
     }
 }
