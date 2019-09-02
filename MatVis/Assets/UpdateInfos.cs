@@ -27,7 +27,7 @@ public class UpdateInfos : MonoBehaviour
         }
         else
         {
-            Richtung.text = "Richtung:\n X: " + Math.Round(Layertransform.forward.x, 2).ToString() + " \n Y: " + Math.Round(Layertransform.forward.y, 2).ToString() + " \n Z: " + Math.Round(Layertransform.forward.z, 2).ToString();
+            Richtung.text = "Richtung:\n X: " + Math.Round(Layertransform.up.x, 2).ToString() + " \n Y: " + Math.Round(Layertransform.up.y, 2).ToString() + " \n Z: " + Math.Round(Layertransform.up.z, 2).ToString();
         }
     }
 }
