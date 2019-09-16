@@ -20,13 +20,13 @@ public class Findschnittpunkt : MonoBehaviour
         //(pos.z + a * dir.z)=x3
         //x1 * n.x + x2 * n.y + x3 * n.z = d
         //(pos.x + a * dir.x) * n.x + (pos.y + a * dir.y) * n.y + (pos.z + a * dir.z) * n.z = d
-        //n.x * pos.x + n.y * pos.y + n.z * pos.z - d = a (dir.x * n.x + dir.y * n.y + dir.z * n.z)
-        //(dot( n, pos ) - d) / dot( n, dir ) = a
+        //n.x * pos.x + n.y * pos.y + n.z * pos.z - d = - a (dir.x * n.x + dir.y * n.y + dir.z * n.z)
+        //(dot( n, pos ) - d) / dot( n, dir ) = - a
         //if dot( n, dir ) == 0 Line is parallel to plane (has no or infinite points)
         //if dot( n, pos ) == d Line starts in plane
         if(Vector3.Dot(n,dir) != 0)
         {
-            Vector3 PointPos= pos + dir * (float) ((Vector3.Dot(n, pos) - d) / Vector3.Dot(n, dir));
+            Vector3 PointPos= pos - dir * (float) ((Vector3.Dot(n, pos) - d) / Vector3.Dot(n, dir));
             transform.position = PointPos;
         }
     }

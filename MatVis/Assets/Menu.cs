@@ -11,7 +11,6 @@ public class Menu : MonoBehaviour
     public List<GameObject> Items3D;
     public Transform pivot;
     public List<Menu> othermenus;
-    public ShowhideMenus shm;
     public RawImage image;
     public bool isopen;
     // Start is called before the first frame update
@@ -46,19 +45,17 @@ public class Menu : MonoBehaviour
     }
     public void clickbutton()
     {
-        if (shm.isopen)
+        if (isopen)
         {
-            if (isopen)
+            closeMenu();
+        }
+        else
+        {
+            foreach (Menu menu in othermenus)
             {
-                closeMenu();
+                menu.closeMenu();
             }
-            else
-            {
-                foreach (Menu menu in othermenus){
-                    menu.closeMenu();
-                }
-                openMenu();
-            }
+            openMenu();
         }
     }
     // Update is called once per frame

@@ -45,9 +45,14 @@ public class AddComponents : MonoBehaviour
         ebeneUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -((Ebenen.MenuItems.Count * 510) + 140));
         ebeneInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133, Ebeneninfos.MenuItems.Count * 280);
         ebeneInfo.GetComponent<UpdateInfos>().Layertransform = ebene.transform;
+        if (!Ebeneninfos.isopen)
+        {
+            ebeneInfo.active = false;
+        }
         ebeneUI.GetComponent<SetPlane>().planetransform = ebene.transform;
         Ebeneninfos.MenuItems.Add(ebeneInfo);
         Ebenen.MenuItems.Add(ebeneUI);
+        ebene.transform.localPosition =new Vector3(0, 0, 0);
     }
     void AddLine()
     {
@@ -68,10 +73,14 @@ public class AddComponents : MonoBehaviour
         geradenUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -((Geraden.MenuItems.Count * 510) + 140));
 
         geradenInfo.GetComponent<UpdateInfos>().Layertransform = geraden.transform;
-        geradenInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133, Geradeninfos.MenuItems.Count * 280 - 133);
-
+        geradenInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133 , Geradeninfos.MenuItems.Count * 280  - 133);
+        if (!Geradeninfos.isopen)
+        {
+            geradenInfo.active = false;
+        }
         Geradeninfos.MenuItems.Add(geradenInfo);
         Geraden.MenuItems.Add(geradenUI);
+        geraden.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     void AddSchnittkante(Transform t1, Transform t2, string ebene1, string ebene2)
@@ -84,7 +93,11 @@ public class AddComponents : MonoBehaviour
         GameObject geradenInfo = Instantiate(prefabGeradenInfo);
         geradenInfo.GetComponent<UpdateInfos>().Layertransform = kante.transform;
         geradenInfo.transform.SetParent(Geradeninfos.transform);
-        geradenInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133, Geradeninfos.MenuItems.Count * 280 - 133);
+        geradenInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133 , Geradeninfos.MenuItems.Count * 280  - 133);
+        if (!Geradeninfos.isopen)
+        {
+            geradenInfo.active = false;
+        }
         Geradeninfos.MenuItems.Add(geradenInfo);
 
         GameObject winkelInfo = Instantiate(prefabSchnittWinkelInfo);
@@ -93,7 +106,11 @@ public class AddComponents : MonoBehaviour
         winkelInfo.GetComponent<UpdateWinkel>().Transform1Description = ebene1;
         winkelInfo.GetComponent<UpdateWinkel>().Transform1Description = ebene2;
         winkelInfo.transform.SetParent(Winkelinfos.transform);
-        winkelInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133, Winkelinfos.MenuItems.Count * 280 - 133 * 4);
+        winkelInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133 , Winkelinfos.MenuItems.Count * 280  - 133 * 4);
+        if (!Winkelinfos.isopen)
+        {
+            winkelInfo.active = false;
+        }
         Winkelinfos.MenuItems.Add(winkelInfo);
 
     }
@@ -108,7 +125,11 @@ public class AddComponents : MonoBehaviour
         GameObject punktInfo = Instantiate(prefabSchnittpunktInfo);
         punktInfo.GetComponent<UpdateInfos>().Layertransform = punkt.transform;
         punktInfo.transform.SetParent(Punktinfos.transform);
-        punktInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133, Punktinfos.MenuItems.Count * 280 - 133 * 2);
+        punktInfo.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133 , Punktinfos.MenuItems.Count * 280 - 133 * 2);
+        if (!Punktinfos.isopen)
+        {
+            punktInfo.active = false;
+        }
         Punktinfos.MenuItems.Add(punktInfo);
     }
 

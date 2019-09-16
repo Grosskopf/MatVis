@@ -37,8 +37,8 @@ public class SetGerade : MonoBehaviour
 
     public void settransform()
     {
-        linetransform.position = Position;
+        linetransform.localPosition = Position;
         Quaternion rotation = Quaternion.FromToRotation(new Vector3(0, 0, 1), Richtung);
-        linetransform.rotation = rotation;
+        linetransform.localRotation = rotation;
     }
 }

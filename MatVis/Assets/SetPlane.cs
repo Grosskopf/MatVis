@@ -48,8 +48,8 @@ public class SetPlane : MonoBehaviour
 
     public void settransform()
     {
-        planetransform.position = Position;
+        planetransform.localPosition = Position;
         Quaternion rotation = Quaternion.FromToRotation(new Vector3(0, 1, 0), Normale);
-        planetransform.rotation = rotation;
+        planetransform.localRotation = rotation;
     }
 }

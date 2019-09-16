@@ -20,7 +20,7 @@ public class UpdateInfos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Position.text = "Position:\n X: " + Math.Round(Layertransform.position.x ,2).ToString() + " \n Y: " + Math.Round(Layertransform.position.y,2).ToString() + " \n Z: " + Math.Round(Layertransform.position.z,2).ToString();
+        Position.text = "Position:\n X: " + Math.Round(Layertransform.localPosition.x ,2).ToString() + " \n Y: " + Math.Round(Layertransform.localPosition.y,2).ToString() + " \n Z: " + Math.Round(Layertransform.localPosition.z,2).ToString();
         if (Normale != null)
         {
             Normale.text = "Normale:\n X: " + Math.Round(Layertransform.up.x, 2).ToString() + " \n Y: " + Math.Round(Layertransform.up.y, 2).ToString() + " \n Z: " + Math.Round(Layertransform.up.z, 2).ToString();
