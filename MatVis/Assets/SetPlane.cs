@@ -22,15 +22,15 @@ public class SetPlane : MonoBehaviour
 
     public void setposX(string x)
     {
-        Position.x = float.Parse(x, CultureInfo.InvariantCulture);
+        Position.x = float.Parse(x, CultureInfo.InvariantCulture) / 50;
     }
     public void setposY(string y)
     {
-        Position.y = float.Parse(y, CultureInfo.InvariantCulture);
+        Position.z = float.Parse(y, CultureInfo.InvariantCulture) / 50;
     }
     public void setposZ(string z)
     {
-        Position.z = float.Parse(z, CultureInfo.InvariantCulture);
+        Position.y = float.Parse(z, CultureInfo.InvariantCulture) / 50;
     }
     public void setNormX(string x)
     {
@@ -38,11 +38,11 @@ public class SetPlane : MonoBehaviour
     }
     public void setNormY(string y)
     {
-        Normale.y = float.Parse(y, CultureInfo.InvariantCulture);
+        Normale.z = float.Parse(y, CultureInfo.InvariantCulture);
     }
     public void setNormZ(string z)
     {
-        Normale.z = float.Parse(z, CultureInfo.InvariantCulture);
+        Normale.y = float.Parse(z, CultureInfo.InvariantCulture);
     }
 
 

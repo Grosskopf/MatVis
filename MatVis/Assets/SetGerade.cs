@@ -11,15 +11,15 @@ public class SetGerade : MonoBehaviour
 
     public void setposX(string x)
     {
-        Position.x = float.Parse(x, CultureInfo.InvariantCulture);
+        Position.x = float.Parse(x, CultureInfo.InvariantCulture) / 50;
     }
     public void setposY(string y)
     {
-        Position.y = float.Parse(y, CultureInfo.InvariantCulture);
+        Position.z = float.Parse(y, CultureInfo.InvariantCulture) / 50;
     }
     public void setposZ(string z)
     {
-        Position.z = float.Parse(z, CultureInfo.InvariantCulture);
+        Position.y = float.Parse(z, CultureInfo.InvariantCulture) / 50;
     }
     public void setNormX(string x)
     {
@@ -27,11 +27,11 @@ public class SetGerade : MonoBehaviour
     }
     public void setNormY(string y)
     {
-        Richtung.y = float.Parse(y, CultureInfo.InvariantCulture);
+        Richtung.z = float.Parse(y, CultureInfo.InvariantCulture);
     }
     public void setNormZ(string z)
     {
-        Richtung.z = float.Parse(z, CultureInfo.InvariantCulture);
+        Richtung.y = float.Parse(z, CultureInfo.InvariantCulture);
     }
 
 

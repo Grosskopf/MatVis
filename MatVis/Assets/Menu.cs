@@ -11,8 +11,10 @@ public class Menu : MonoBehaviour
     public List<GameObject> Items3D;
     public Transform pivot;
     public List<Menu> othermenus;
+    public Vector2 Listoffset;
     public RawImage image;
     public bool isopen;
+    public bool upwards;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +58,24 @@ public class Menu : MonoBehaviour
                 menu.closeMenu();
             }
             openMenu();
+        }
+    }
+    public void rearrange()
+    {
+        int i = 0;
+        foreach (GameObject MenuItem in MenuItems){
+            if (upwards)
+            {
+                MenuItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(-133, i);
+                i += (int)MenuItem.GetComponent<RectTransform>().rect.height;
+                i += 10;
+            }
+            else
+            {
+                MenuItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, i-140);
+                i -= (int)MenuItem.GetComponent<RectTransform>().rect.height;
+                i -= 10;
+            }
         }
     }
     // Update is called once per frame

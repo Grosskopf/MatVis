@@ -17,22 +17,49 @@ public class SnapSchnittkante : MonoBehaviour
     {
         Vector3 upL2 = layer2.up;
 
-        float dL2 = Vector3.Dot(layer2.position,upL2);
+        float dL2 = Vector3.Dot(layer2.localPosition,upL2);
 
         Vector3 rL1 = layer1.right;
         Vector3 fL1 = layer1.forward;
 
-        Vector3 posL1 = layer1.position;
+        Vector3 posL1 = layer1.localPosition;
 
 
-        if( Vector3.Dot(upL2,rL1)!=0 && Vector3.Dot(upL2,fL1) != 0)
+        if (Vector3.Dot(upL2, rL1) != 0 && Vector3.Dot(upL2, fL1) != 0)
         {
             Vector3 outPos = posL1 + (dL2 - Vector3.Dot(upL2, posL1)) / Vector3.Dot(upL2, fL1) * fL1;
             Vector3 outDir = rL1 - (Vector3.Dot(upL2, rL1) / Vector3.Dot(upL2, fL1)) * fL1;
-            transform.position = outPos;
+            transform.localPosition = outPos;
             transform.LookAt(outPos + outDir);
             //transform.up = outDir;
 
+        }
+        else { 
+            rL1 = (layer1.right + layer1.forward).normalized;
+            
+            if (Vector3.Dot(upL2, rL1) != 0 && Vector3.Dot(upL2, fL1) != 0)
+            {
+                Vector3 outPos = posL1 + (dL2 - Vector3.Dot(upL2, posL1)) / Vector3.Dot(upL2, fL1) * fL1;
+                Vector3 outDir = rL1 - (Vector3.Dot(upL2, rL1) / Vector3.Dot(upL2, fL1)) * fL1;
+                transform.localPosition = outPos;
+                transform.LookAt(transform.position + outDir);
+                //transform.up = outDir;
+
+            }
+            else
+            {
+
+                fL1 = (layer1.right - layer1.forward).normalized;
+                if (Vector3.Dot(upL2, rL1) != 0 && Vector3.Dot(upL2, fL1) != 0)
+                {
+                    Vector3 outPos = posL1 + (dL2 - Vector3.Dot(upL2, posL1)) / Vector3.Dot(upL2, fL1) * fL1;
+                    Vector3 outDir = rL1 - (Vector3.Dot(upL2, rL1) / Vector3.Dot(upL2, fL1)) * fL1;
+                    transform.localPosition = outPos;
+                    transform.LookAt(transform.position + outDir);
+                    //transform.up = outDir;
+
+                }
+            }
         }
     }
 }
