@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="Walltracker_out_rgb" size="0.240000 0.240000" />
     <ImageTarget name="MarkerEbene3" size="0.050000 0.050000" />
     <ImageTarget name="MarkerEbene2" size="0.050000 0.050000" />
     <ImageTarget name="MarkerEbene1" size="0.050000 0.050000" />
