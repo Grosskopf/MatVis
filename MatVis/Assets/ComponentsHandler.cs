@@ -29,6 +29,9 @@ public class ComponentsHandler : MonoBehaviour
     public List<Transform> trackedPlanes;
     public TextMeshProUGUI text;
 
+    public Texture2D EbenenIcon;
+    public Texture2D GeradenIcon;
+
     public void AddPlaneTracked(Transform tracker)
     {
         for (int i = 0; i < Ebenen.Items3D.Count; i++)
@@ -322,6 +325,20 @@ public class ComponentsHandler : MonoBehaviour
 
     void Update()
     {
+        if (Geraden.isopen)
+        {
+            GetComponent<RawImage>().texture = GeradenIcon;
+        }
+        else if (Ebenen.isopen)
+        {
+            GetComponent<RawImage>().texture = EbenenIcon;
+        }
+        else
+        {
+            GetComponent<RawImage>().enabled = false;
+        }
+
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);

@@ -28,6 +28,13 @@ public class Findschnittpunkt : MonoBehaviour
         {
             Vector3 PointPos= pos - dir * (float) ((Vector3.Dot(n, pos) - d) / Vector3.Dot(n, dir));
             transform.position = PointPos;
+            GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<SphereCollider>().enabled = true;
+        }
+        else
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<SphereCollider>().enabled = false;
         }
     }
 }
