@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if !UNITY_EDITOR_LINUX
 using Vuforia;
-
+#endif
 public class AddMarkerplane : MonoBehaviour
 {
     // Start is called before the first frame update
 
     public bool istracked;
-    public Menu InfoMenu;
+    public MenuButton InfoMenu;
     private GameObject InfoField;
     public GameObject InfoFieldPrefab;
     public ComponentsHandler ac;
@@ -21,6 +22,7 @@ public class AddMarkerplane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if !UNITY_EDITOR_LINUX
         if(
         (GetComponent<ImageTargetBehaviour>().CurrentStatus == TrackableBehaviour.Status.TRACKED ||
         GetComponent<ImageTargetBehaviour>().CurrentStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)&&
@@ -57,5 +59,7 @@ public class AddMarkerplane : MonoBehaviour
             plane.SetActive(true);
             ac.RemovePlaneTracked(transform);
         }
+#endif
+
     }
 }

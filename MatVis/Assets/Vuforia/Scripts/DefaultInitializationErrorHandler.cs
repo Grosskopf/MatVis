@@ -5,7 +5,7 @@ Copyright (c) 2010-2014 Qualcomm Connected Experiences, Inc.
 All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
-
+#if !UNITY_EDITOR_LINUX
 using UnityEngine;
 using Vuforia;
 
@@ -17,7 +17,7 @@ using Vuforia;
 /// </summary>
 public class DefaultInitializationErrorHandler : VuforiaMonoBehaviour
 {
-    #region Vuforia_lifecycle_events
+#region Vuforia_lifecycle_events
 
     public void OnVuforiaInitializationError(VuforiaUnity.InitError initError)
     {
@@ -28,9 +28,9 @@ public class DefaultInitializationErrorHandler : VuforiaMonoBehaviour
         }
     }
 
-    #endregion // Vuforia_lifecycle_events
+#endregion // Vuforia_lifecycle_events
 
-    #region PRIVATE_MEMBER_VARIABLES
+#region PRIVATE_MEMBER_VARIABLES
 
     string mErrorText = "";
     bool mErrorOccurred;
@@ -45,9 +45,9 @@ public class DefaultInitializationErrorHandler : VuforiaMonoBehaviour
     Texture2D headerTexture;
     Texture2D footerTexture;
 
-    #endregion // PRIVATE_MEMBER_VARIABLES
+#endregion // PRIVATE_MEMBER_VARIABLES
 
-    #region UNTIY_MONOBEHAVIOUR_METHODS
+#region UNTIY_MONOBEHAVIOUR_METHODS
 
     void Awake()
     {
@@ -75,9 +75,9 @@ public class DefaultInitializationErrorHandler : VuforiaMonoBehaviour
         VuforiaRuntime.Instance.UnregisterVuforiaInitErrorCallback(OnVuforiaInitializationError);
     }
 
-    #endregion // UNTIY_MONOBEHAVIOUR_METHODS
+#endregion // UNTIY_MONOBEHAVIOUR_METHODS
 
-    #region PRIVATE_METHODS
+#region PRIVATE_METHODS
 
     void DrawWindowContent(int id)
     {
@@ -92,7 +92,7 @@ public class DefaultInitializationErrorHandler : VuforiaMonoBehaviour
         {
 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
-    #else
+#else
             Application.Quit();
 #endif
         }
@@ -236,5 +236,6 @@ public class DefaultInitializationErrorHandler : VuforiaMonoBehaviour
         return texture;
     }
 
-    #endregion // PRIVATE_METHODS
+#endregion // PRIVATE_METHODS
 }
+#endif

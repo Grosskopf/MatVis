@@ -8,28 +8,28 @@ public class ShowhideMenus : MonoBehaviour
     public RawImage open;
     public RawImage close;
     public bool isopen = true;
-    public List<Menu> menus;
+    public List<MenuButton> menus;
     public List<bool> wasopen;
 
     public void closemenus()
     {
-        foreach(Menu menu in menus)
+        foreach(MenuButton menu in menus)
         {
             wasopen[menus.IndexOf(menu)] = menu.isopen;
-            menu.closeMenu();
+            menu.CloseMenu();
         }
     }
     public void openmenus()
     {
-        foreach (Menu menu in menus)
+        foreach (MenuButton menu in menus)
         {
             if (wasopen[menus.IndexOf(menu)])
             {
-                menu.openMenu();
+                menu.OpenMenu();
             }
         }
     }
-    public void clickbutton()
+    public void Clickbutton()
     {
         if (isopen)
         {

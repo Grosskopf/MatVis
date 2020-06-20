@@ -5,7 +5,7 @@ Confidential and Proprietary - Protected under copyright and other laws.
 Vuforia is a trademark of PTC Inc., registered in the United States and other 
 countries.
 ===============================================================================*/
-
+#if !UNITY_EDITOR_LINUX
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -112,3 +112,4 @@ namespace Vuforia.UnityCompiled
         }
     }
 }
+#endif

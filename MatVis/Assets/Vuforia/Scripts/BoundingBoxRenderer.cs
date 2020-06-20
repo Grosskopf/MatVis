@@ -6,7 +6,7 @@ Confidential and Proprietary - Protected under copyright and other laws.
 Vuforia is a trademark of PTC Inc., registered in the United States and other 
 countries.
 ==============================================================================*/
-
+#if !UNITY_EDITOR_LINUX
 using UnityEngine;
 using Vuforia;
 
@@ -15,11 +15,11 @@ using Vuforia;
 /// </summary>
 public class BoundingBoxRenderer : MonoBehaviour
 {
-    #region PRIVATE_MEMBERS
+#region PRIVATE_MEMBERS
 
     private Material mLineMaterial = null;
 
-    #endregion // PRIVATE_MEMBERS
+#endregion // PRIVATE_MEMBERS
     
 
 
@@ -92,3 +92,4 @@ public class BoundingBoxRenderer : MonoBehaviour
         GL.PopMatrix();
     }
 }
+#endif

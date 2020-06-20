@@ -5,7 +5,7 @@ Copyright (c) 2010-2014 Qualcomm Connected Experiences, Inc.
 All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
-
+#if !UNITY_EDITOR_LINUX
 using UnityEngine;
 using Vuforia;
 
@@ -17,15 +17,15 @@ using Vuforia;
 /// </summary>
 public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 {
-    #region PROTECTED_MEMBER_VARIABLES
+#region PROTECTED_MEMBER_VARIABLES
 
     protected TrackableBehaviour mTrackableBehaviour;
     protected TrackableBehaviour.Status m_PreviousStatus;
     protected TrackableBehaviour.Status m_NewStatus;
 
-    #endregion // PROTECTED_MEMBER_VARIABLES
+#endregion // PROTECTED_MEMBER_VARIABLES
 
-    #region UNITY_MONOBEHAVIOUR_METHODS
+#region UNITY_MONOBEHAVIOUR_METHODS
 
     protected virtual void Start()
     {
@@ -40,9 +40,9 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
             mTrackableBehaviour.UnregisterTrackableEventHandler(this);
     }
 
-    #endregion // UNITY_MONOBEHAVIOUR_METHODS
+#endregion // UNITY_MONOBEHAVIOUR_METHODS
 
-    #region PUBLIC_METHODS
+#region PUBLIC_METHODS
 
     /// <summary>
     ///     Implementation of the ITrackableEventHandler function called when the
@@ -79,9 +79,9 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         }
     }
 
-    #endregion // PUBLIC_METHODS
+#endregion // PUBLIC_METHODS
 
-    #region PROTECTED_METHODS
+#region PROTECTED_METHODS
 
     protected virtual void OnTrackingFound()
     {
@@ -128,5 +128,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         }
     }
 
-    #endregion // PROTECTED_METHODS
+#endregion // PROTECTED_METHODS
 }
+#endif

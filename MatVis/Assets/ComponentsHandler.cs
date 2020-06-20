@@ -4,7 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
+public class Compnonent : MonoBehaviour
+{
+    public String Name;
+    public GameObject Prefab;
+    public GameObject PrefabUI;
+    public GameObject PrefabInfo;
+    public Buttonlist AddMenu;
+    public Buttonlist InfoMenu;
+}
 public class ComponentsHandler : MonoBehaviour
 {
     public GameObject pivot;
@@ -14,23 +22,44 @@ public class ComponentsHandler : MonoBehaviour
     public GameObject prefabGeraden;
     public GameObject prefabGeradenUI;
     public GameObject prefabGeradenInfo;
+    public GameObject prefabPunkte;
+    public GameObject prefabPunkteUI;
+    public GameObject prefabPunkteInfo;
     public GameObject prefabSchnittkante;
     public GameObject prefabSchnittpunkt;
     public GameObject prefabSchnittpunktInfo;
     public GameObject prefabSchnittWinkelInfo;
 
-    public Menu Ebenen;
-    public Menu Ebeneninfos;
-    public Menu Geraden;
-    public Menu Geradeninfos;
-    public Menu Punktinfos;
-    public Menu Winkelinfos;
+    public Buttonlist InfoMenu;
+    public Buttonlist AddMenu;
+
+    private MenuButton Ebenen;
+    private MenuButton EbenenInfos;
+    private MenuButton Geraden;
+    private MenuButton GeradenInfos;
+    private MenuButton Punkte;
+    private MenuButton PunkteInfos;
+    private MenuButton WinkelInfos;
 
     public List<Transform> trackedPlanes;
+
+    public Addbutton addbutton;
+
     public TextMeshProUGUI text;
 
-    public Texture2D EbenenIcon;
-    public Texture2D GeradenIcon;
+    void Start()
+    {
+        AddMenu.StartFromCH();
+        InfoMenu.StartFromCH();
+        Ebenen = AddMenu.GetMenu("Ebenen");
+        Geraden = AddMenu.GetMenu("Geraden");
+        Punkte = AddMenu.GetMenu("Punkte");
+        EbenenInfos = InfoMenu.GetMenu("EbenenInfos");
+        GeradenInfos = InfoMenu.GetMenu("GeradenInfos");
+        PunkteInfos = InfoMenu.GetMenu("PunkteInfos");
+        WinkelInfos = InfoMenu.GetMenu("WinkelInfos");
+
+    }
 
     public void AddPlaneTracked(Transform tracker)
     {
@@ -53,7 +82,7 @@ public class ComponentsHandler : MonoBehaviour
     {
         text.text = "1";
         List<GameObject> geradenToRemove = new List<GameObject>();
-        foreach (GameObject geradeninfo in Geradeninfos.MenuItems)
+        foreach (GameObject geradeninfo in GeradenInfos.MenuItems)
         {
             SnapSchnittkante kante = geradeninfo.GetComponent<UpdateInfos>().Layertransform.GetComponent<SnapSchnittkante>();
             if(kante != null)
@@ -66,7 +95,7 @@ public class ComponentsHandler : MonoBehaviour
         }
         text.text = "2";
         List<GameObject> winkelToRemove = new List<GameObject>();
-        foreach (GameObject winkel in Winkelinfos.MenuItems)
+        foreach (GameObject winkel in WinkelInfos.MenuItems)
         {
             if (winkel.GetComponent<UpdateWinkel>().transform1 == tracker || winkel.GetComponent<UpdateWinkel>().transform2 == tracker)
             {
@@ -77,14 +106,14 @@ public class ComponentsHandler : MonoBehaviour
         text.text = "3";
         foreach (GameObject winkel in winkelToRemove)
         {
-            Winkelinfos.MenuItems.Remove(winkel);
+            WinkelInfos.MenuItems.Remove(winkel);
             GameObject.Destroy(winkel);
         }
 
         text.text = "4";
         foreach (GameObject gerade in geradenToRemove)
         {
-            Geradeninfos.MenuItems.Remove(gerade);
+            GeradenInfos.MenuItems.Remove(gerade);
             text.text = "5";
             GameObject.Destroy(
             gerade.GetComponent<UpdateInfos>().Layertransform.gameObject);
@@ -96,13 +125,13 @@ public class ComponentsHandler : MonoBehaviour
         trackedPlanes.Remove(tracker);
     }
 
-    void AddPlane()
+    public void AddPlane()
     {
         GameObject ebene = Instantiate(prefabEbenen);
         GameObject ebeneUI = Instantiate(prefabEbenenUI);
         GameObject ebeneInfo = Instantiate(prefabEbenenInfo);
         ebeneUI.transform.SetParent(Ebenen.transform);
-        ebeneInfo.transform.SetParent(Ebeneninfos.transform);
+        ebeneInfo.transform.SetParent(EbenenInfos.gameObject.transform);
         ebene.transform.SetParent(pivot.transform);
         ebene.transform.localPosition = new Vector3(0, 0, 0);
         string nameEbene = "Ebene " + Ebenen.Items3D.Count;
@@ -121,17 +150,17 @@ public class ComponentsHandler : MonoBehaviour
         }
         Ebenen.Items3D.Add(ebene);
         ebeneInfo.GetComponent<UpdateInfos>().Layertransform = ebene.transform;
-        if (!Ebeneninfos.isopen)
+        if (!EbenenInfos.isopen)
         {
             ebeneInfo.SetActive(false);
         }
         ebeneUI.GetComponent<SetPlane>().planetransform = ebene.transform;
-        Ebeneninfos.MenuItems.Add(ebeneInfo);
+        EbenenInfos.MenuItems.Add(ebeneInfo);
         Ebenen.MenuItems.Add(ebeneUI);
-        Ebenen.rearrange();
-        Ebeneninfos.rearrange();
+        Ebenen.Rearrange();
+        EbenenInfos.Rearrange();
     }
-    void AddLine()
+    public void AddLine()
     {
         GameObject geraden = Instantiate(prefabGeraden);
         GameObject geradenUI = Instantiate(prefabGeradenUI);
@@ -154,21 +183,57 @@ public class ComponentsHandler : MonoBehaviour
         Geraden.Items3D.Add(geraden);
         geraden.transform.SetParent(pivot.transform);
         geradenUI.transform.SetParent(Geraden.transform);
-        geradenInfo.transform.SetParent(Geradeninfos.transform);
+        geradenInfo.transform.SetParent(GeradenInfos.gameObject.transform);
         geradenUI.GetComponent<SetGerade>().linetransform = geraden.transform;
 
         geradenInfo.GetComponent<UpdateInfos>().Layertransform = geraden.transform;
-        if (!Geradeninfos.isopen)
+        if (!GeradenInfos.isopen)
         {
             geradenInfo.SetActive(false);
         }
-        Geradeninfos.MenuItems.Add(geradenInfo);
+        GeradenInfos.MenuItems.Add(geradenInfo);
         Geraden.MenuItems.Add(geradenUI);
-        Geraden.rearrange();
-        Geradeninfos.rearrange();
+        Geraden.Rearrange();
+        GeradenInfos.Rearrange();
         geraden.transform.localPosition = new Vector3(0, 0, 0);
     }
+    internal void AddPunkt()
+    {
+        GameObject punkt = Instantiate(prefabPunkte);
+        GameObject punktUI = Instantiate(prefabPunkteUI);
+        GameObject punktInfo = Instantiate(prefabPunkteInfo);
+        string namePunkt = "Punkt " + Punkte.Items3D.Count;
+        punktInfo.GetComponent<UpdateInfos>().Name.SetText(namePunkt);
+        foreach (GameObject ebene in Punkte.Items3D)
+        {
+            AddSchnittpunkt(punkt.transform, ebene.transform);
+        }
 
+        foreach (Transform trackedPlane in trackedPlanes)
+        {
+            if (trackedPlane.GetComponent<AddMarkerplane>().istracked)
+            {
+                AddSchnittpunkt(punkt.transform, trackedPlane);
+            }
+        }
+
+        Punkte.Items3D.Add(punkt);
+        punktUI.transform.SetParent(Punkte.transform);
+        punktInfo.transform.SetParent(PunkteInfos.gameObject.transform);
+        punkt.transform.SetParent(pivot.transform);
+        punktUI.GetComponent<SetPunkt>().punkttransform = punkt.transform;
+
+        punkt.GetComponent<UpdateInfos>().Layertransform = punkt.transform;
+        if (!PunkteInfos.isopen)
+        {
+            punktInfo.SetActive(false);
+        }
+        PunkteInfos.MenuItems.Add(punktInfo);
+        Punkte.MenuItems.Add(punktUI);
+        Punkte.Rearrange();
+        PunkteInfos.Rearrange();
+        punkt.transform.localPosition = new Vector3(0, 0, 0);
+    }
     void AddSchnittkante(Transform t1, Transform t2, string ebene1, string ebene2)
     {
         GameObject kante = Instantiate(prefabSchnittkante);
@@ -179,26 +244,26 @@ public class ComponentsHandler : MonoBehaviour
         GameObject geradenInfo = Instantiate(prefabGeradenInfo);
         geradenInfo.GetComponent<UpdateInfos>().Name.SetText("Schnitt\r\n" + ebene1 + "\r\n" + ebene2);
         geradenInfo.GetComponent<UpdateInfos>().Layertransform = kante.transform;
-        geradenInfo.transform.SetParent(Geradeninfos.transform);
-        if (!Geradeninfos.isopen)
+        geradenInfo.transform.SetParent(GeradenInfos.transform);
+        if (!GeradenInfos.isopen)
         {
             geradenInfo.SetActive(false);
         }
-        Geradeninfos.MenuItems.Add(geradenInfo);
-        Geradeninfos.rearrange();
+        GeradenInfos.MenuItems.Add(geradenInfo);
+        GeradenInfos.Rearrange();
 
         GameObject winkelInfo = Instantiate(prefabSchnittWinkelInfo);
         winkelInfo.GetComponent<UpdateWinkel>().transform1 = t1;
         winkelInfo.GetComponent<UpdateWinkel>().transform2 = t2;
         winkelInfo.GetComponent<UpdateWinkel>().Transform1Description = ebene1;
         winkelInfo.GetComponent<UpdateWinkel>().Transform2Description = ebene2;
-        winkelInfo.transform.SetParent(Winkelinfos.transform);
-        if (!Winkelinfos.isopen)
+        winkelInfo.transform.SetParent(WinkelInfos.transform);
+        if (!WinkelInfos.isopen)
         {
             winkelInfo.active = false;
         }
-        Winkelinfos.MenuItems.Add(winkelInfo);
-        Winkelinfos.rearrange();
+        WinkelInfos.MenuItems.Add(winkelInfo);
+        WinkelInfos.Rearrange();
 
     }
 
@@ -211,33 +276,22 @@ public class ComponentsHandler : MonoBehaviour
 
         GameObject punktInfo = Instantiate(prefabSchnittpunktInfo);
         punktInfo.GetComponent<UpdateInfos>().Layertransform = punkt.transform;
-        punktInfo.transform.SetParent(Punktinfos.transform);
-        if (!Punktinfos.isopen)
+        punktInfo.transform.SetParent(PunkteInfos.transform);
+        if (!PunkteInfos.isopen)
         {
-            punktInfo.active = false;
+            punktInfo.SetActive(false);
         }
-        Punktinfos.MenuItems.Add(punktInfo);
-        Punktinfos.rearrange();
+        PunkteInfos.MenuItems.Add(punktInfo);
+        PunkteInfos.Rearrange();
     }
 
-    public void pressButton()
-    {
-        if (Ebenen.isopen)
-        {
-            AddPlane();
-        }
-        else if (Geraden.isopen)
-        {
-            AddLine();
-        }
-    }
     // Update is called once per frame
     UpdateInfos getLayerinfo(Transform t)
     {
 
-        for (int i = 0; i < Ebeneninfos.MenuItems.Count; i++)
+        for (int i = 0; i < EbenenInfos.MenuItems.Count; i++)
         {
-            GameObject ebene = Ebeneninfos.MenuItems[i];
+            GameObject ebene = EbenenInfos.MenuItems[i];
             UpdateInfos info = ebene.GetComponent<UpdateInfos>();
             if (info.Layertransform == t)
             {
@@ -248,12 +302,12 @@ public class ComponentsHandler : MonoBehaviour
         return null;
     }
 
-    List<UpdateInfos> findassociated(Transform tf)
+    List<UpdateInfos> Findassociated(Transform tf)
     {
         List<UpdateInfos> infos = new List<UpdateInfos>();
-        for (int i = 0; i < Geradeninfos.MenuItems.Count; i++)
+        for (int i = 0; i < GeradenInfos.MenuItems.Count; i++)
         {
-            GameObject gerade = Geradeninfos.MenuItems[i];
+            GameObject gerade = GeradenInfos.MenuItems[i];
             UpdateInfos info = gerade.GetComponent<UpdateInfos>();
             if (info.Layertransform == tf)
             {
@@ -277,9 +331,9 @@ public class ComponentsHandler : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < Ebeneninfos.MenuItems.Count; i++)
+        for (int i = 0; i < EbenenInfos.MenuItems.Count; i++)
         {
-            GameObject ebene = Ebeneninfos.MenuItems[i];
+            GameObject ebene = EbenenInfos.MenuItems[i];
             UpdateInfos info = ebene.GetComponent<UpdateInfos>();
             if (info.Layertransform == tf)
             {
@@ -293,7 +347,7 @@ public class ComponentsHandler : MonoBehaviour
     {
         List<UpdateWinkel> angles = new List<UpdateWinkel>();
         UpdateInfos layer = getLayerinfo(tf);
-        foreach(GameObject angleinfo in Winkelinfos.MenuItems)
+        foreach(GameObject angleinfo in WinkelInfos.MenuItems)
         {
             UpdateWinkel angle = angleinfo.GetComponent<UpdateWinkel>();
             if(angle.transform1 == tf || angle.transform2 == tf)
@@ -301,15 +355,15 @@ public class ComponentsHandler : MonoBehaviour
                 angles.Add(angle);
             }
         }
-        for (int i = 0; i < Geradeninfos.MenuItems.Count; i++)
+        for (int i = 0; i < GeradenInfos.MenuItems.Count; i++)
         {
-            UpdateInfos info = Geradeninfos.MenuItems[i].GetComponent<UpdateInfos>();
+            UpdateInfos info = GeradenInfos.MenuItems[i].GetComponent<UpdateInfos>();
             if (info.Layertransform == tf)
             {
                 SnapSchnittkante schnittkante = info.Layertransform.gameObject.GetComponent<SnapSchnittkante>();
                 if (schnittkante != null)
                 {
-                    foreach (GameObject angleinfo in Winkelinfos.MenuItems)
+                    foreach (GameObject angleinfo in WinkelInfos.MenuItems)
                     {
                         UpdateWinkel angle = angleinfo.GetComponent<UpdateWinkel>();
                         if (angle.transform1 == schnittkante.layer1 && angle.transform2 == schnittkante.layer2)
@@ -327,15 +381,19 @@ public class ComponentsHandler : MonoBehaviour
     {
         if (Geraden.isopen)
         {
-            GetComponent<RawImage>().texture = GeradenIcon;
+            addbutton.SetStatus("Gerade");
         }
         else if (Ebenen.isopen)
         {
-            GetComponent<RawImage>().texture = EbenenIcon;
+            addbutton.SetStatus("Ebene");
+        }
+        else if (Punkte.isopen)
+        {
+            addbutton.SetStatus("Punkt");
         }
         else
         {
-            GetComponent<RawImage>().enabled = false;
+            addbutton.SetStatus("");
         }
 
 
@@ -349,9 +407,9 @@ public class ComponentsHandler : MonoBehaviour
             if (Physics.Raycast(ray,out hit))
             {
                 Transform selectedObject = hit.transform;
-                for(int i =0; i< Ebeneninfos.MenuItems.Count; i++)
+                for(int i =0; i< EbenenInfos.MenuItems.Count; i++)
                 {
-                    GameObject ebene = Ebeneninfos.MenuItems[i];
+                    GameObject ebene = EbenenInfos.MenuItems[i];
                     UpdateInfos infos = ebene.GetComponent<UpdateInfos>();
                     if (infos.Layertransform == selectedObject)
                     {
@@ -364,9 +422,9 @@ public class ComponentsHandler : MonoBehaviour
                         text.SetText("selected layer: " + infos.Name.text);
                     }
                 }
-                for(int i = 0; i< Geradeninfos.MenuItems.Count; i++)
+                for(int i = 0; i< GeradenInfos.MenuItems.Count; i++)
                 {
-                    GameObject gerade = Geradeninfos.MenuItems[i];
+                    GameObject gerade = GeradenInfos.MenuItems[i];
                     UpdateInfos infos = gerade.GetComponent<UpdateInfos>();
                     if (infos.Layertransform == selectedObject.parent)
                     {
@@ -374,9 +432,9 @@ public class ComponentsHandler : MonoBehaviour
                         text.SetText("selected Gerade: " + infos.Name.text);
                     }
                 }
-                for(int i = 0; i< Punktinfos.MenuItems.Count; i++)
+                for(int i = 0; i< PunkteInfos.MenuItems.Count; i++)
                 {
-                    GameObject punkt = Punktinfos.MenuItems[i];
+                    GameObject punkt = PunkteInfos.MenuItems[i];
                     UpdateInfos infos = punkt.GetComponent<UpdateInfos>();
                     if (infos.Layertransform == selectedObject.parent)
                     {
@@ -394,28 +452,28 @@ public class ComponentsHandler : MonoBehaviour
             }
             if (found == null)
             {
-                foreach (GameObject info in Ebeneninfos.MenuItems)
+                foreach (GameObject info in EbenenInfos.MenuItems)
                 {
                     foreach(CanvasRenderer cr in info.GetComponentsInChildren<CanvasRenderer>())
                     {
                         cr.SetAlpha(1.0f);
                     }
                 }
-                foreach (GameObject info in Geradeninfos.MenuItems)
+                foreach (GameObject info in GeradenInfos.MenuItems)
                 {
                     foreach (CanvasRenderer cr in info.GetComponentsInChildren<CanvasRenderer>())
                     {
                         cr.SetAlpha(1.0f);
                     }
                 }
-                foreach (GameObject info in Punktinfos.MenuItems)
+                foreach (GameObject info in PunkteInfos.MenuItems)
                 {
                     foreach (CanvasRenderer cr in info.GetComponentsInChildren<CanvasRenderer>())
                     {
                         cr.SetAlpha(1.0f);
                     }
                 }
-                foreach (GameObject info in Winkelinfos.MenuItems)
+                foreach (GameObject info in WinkelInfos.MenuItems)
                 {
                     foreach (CanvasRenderer cr in info.GetComponentsInChildren<CanvasRenderer>())
                     {
@@ -426,9 +484,9 @@ public class ComponentsHandler : MonoBehaviour
             }
             else
             {
-                List<UpdateInfos> fields=findassociated(found);
+                List<UpdateInfos> fields=Findassociated(found);
                 List<UpdateWinkel> angles = findassociatedangles(found);
-                foreach (GameObject info in Ebeneninfos.MenuItems)
+                foreach (GameObject info in EbenenInfos.MenuItems)
                 {
                     if (fields.Contains(info.GetComponent<UpdateInfos>()))
                     {
@@ -444,7 +502,7 @@ public class ComponentsHandler : MonoBehaviour
                         }
                     }
                 }
-                foreach (GameObject info in Geradeninfos.MenuItems)
+                foreach (GameObject info in GeradenInfos.MenuItems)
                 {
                     if (fields.Contains(info.GetComponent<UpdateInfos>()))
                     {
@@ -461,7 +519,7 @@ public class ComponentsHandler : MonoBehaviour
                         }
                     }
                 }
-                foreach (GameObject info in Punktinfos.MenuItems)
+                foreach (GameObject info in PunkteInfos.MenuItems)
                 {
                     if (fields.Contains(info.GetComponent<UpdateInfos>()))
                     {
@@ -478,7 +536,7 @@ public class ComponentsHandler : MonoBehaviour
                         }
                     }
                 }
-                foreach (GameObject info in Winkelinfos.MenuItems)
+                foreach (GameObject info in WinkelInfos.MenuItems)
                 {
                     if (angles.Contains(info.GetComponent<UpdateWinkel>()))
                     {
