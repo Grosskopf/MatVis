@@ -93,7 +93,7 @@ public class UpdateInfos : InfoMenuItem
     {
         if (Position != null)
         {
-            Position.text = /*"Position:\n*/ "X: " + Math.Round(Layertransform.localPosition.x * 50, 2).ToString() + " \n Y: " + Math.Round(Layertransform.localPosition.z * 50, 2).ToString() + " \n Z: " + Math.Round(Layertransform.localPosition.y * 50, 2).ToString();
+            Position.text = /*"Position:\n*/ "" + Math.Round(Layertransform.localPosition.x * 50, 2).ToString() + "\n" + Math.Round(Layertransform.localPosition.z * 50, 2).ToString() + "\n" + Math.Round(Layertransform.localPosition.y * 50, 2).ToString();
         }
         foreach(TextMeshProUGUI postxt in PositionenVecs)
         {
@@ -112,7 +112,7 @@ public class UpdateInfos : InfoMenuItem
         }
         else if (Richtung !=null)//das ist also für geraden
         {
-            Richtung.text = "Richtung:\n X: " + Math.Round(Layertransform.parent.InverseTransformDirection(Layertransform.forward).x, 2).ToString() + " \n Y: " + Math.Round(Layertransform.parent.InverseTransformDirection(Layertransform.forward).z, 2).ToString() + " \n Z: " + Math.Round(Layertransform.parent.InverseTransformDirection(Layertransform.forward).y, 2).ToString();
+            Richtung.text = "" + Math.Round(Layertransform.parent.InverseTransformDirection(Layertransform.forward).x, 2).ToString() + "\n" + Math.Round(Layertransform.parent.InverseTransformDirection(Layertransform.forward).z, 2).ToString() + "\n" + Math.Round(Layertransform.parent.InverseTransformDirection(Layertransform.forward).y, 2).ToString();
             if (Layertransform.GetComponent<SnapSchnittkante>() != null && Layertransform.GetComponent<SnapSchnittkante>().isparallel)
             {
                 Position.text = "Die Ebenen sind Parallel";
