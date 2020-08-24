@@ -4,19 +4,19 @@ using System.Globalization;
 using TMPro;
 using UnityEngine;
 
-public class SetGerade : MonoBehaviour
+public class SetGerade : EditCompUI
 {
     public Vector3 Position;
     public Vector3 Richtung;
-    public Transform linetransform;
     public TextMeshProUGUI yPlaceholder;
 
     void Start()
     {
-
-        int actwidth = System.Math.Min(Screen.currentResolution.width, Screen.currentResolution.height);
+        Name.text = component.Name;
+        Name.color = component.color;
+        /*int actwidth = System.Math.Min(Screen.currentResolution.width, Screen.currentResolution.height);
         float scalefactor = ((float)actwidth / 1440.0f);
-        GetComponent<RectTransform>().localScale = new Vector3(scalefactor, scalefactor, 1.0f);
+        GetComponent<RectTransform>().localScale = new Vector3(scalefactor, scalefactor, 1.0f);*/
     }
 
     public void setposX(string x)
@@ -55,8 +55,8 @@ public class SetGerade : MonoBehaviour
 
     public void settransform()
     {
-        linetransform.localPosition = Position;
+        Transform.localPosition = Position;
         Quaternion rotation = Quaternion.FromToRotation(new Vector3(0, 0, 1), Richtung);
-        linetransform.localRotation = rotation;
+        Transform.localRotation = rotation;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class UpdateWinkel : MonoBehaviour
+public class UpdateWinkel : InfoMenuItem
 {
     public Transform transform1;
     public Transform transform2;
@@ -16,15 +16,15 @@ public class UpdateWinkel : MonoBehaviour
     void Start()
     {
 
-        int actwidth = Math.Min(Screen.currentResolution.width, Screen.currentResolution.height);
+        /*int actwidth = Math.Min(Screen.currentResolution.width, Screen.currentResolution.height);
         float scalefactor = ((float)actwidth / 1440.0f);
-        GetComponent<RectTransform>().localScale = new Vector3(scalefactor, scalefactor, 1.0f);
+        GetComponent<RectTransform>().localScale = new Vector3(scalefactor, scalefactor, 1.0f);*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        double winkel = Vector3.Angle(transform1.up, transform2.up);
+        double winkel = Vector3.Angle(transform1.parent.InverseTransformDirection(transform1.up), transform2.parent.InverseTransformDirection(transform2.up));
         if (winkel > 90)
         {
             winkel = 180 - winkel;

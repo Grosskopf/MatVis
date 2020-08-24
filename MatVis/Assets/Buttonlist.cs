@@ -35,29 +35,6 @@ public class Buttonlist : MonoBehaviour
         Label.text = "";
     }
 
-    internal void Rearrange()
-    {
-        int i = 0;
-        foreach (MenuButton MenuItem in items)
-        {
-            if (Vertical)
-            {
-                MenuItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, i);
-                int actwidth = System.Math.Min(Screen.currentResolution.width, Screen.currentResolution.height);
-                float scalefactor = ((float)actwidth / 1440.0f);
-                i += (int)(MenuItem.GetComponent<RectTransform>().rect.height * scalefactor);
-                i += 10;
-            }
-            else
-            {
-                MenuItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, i - 104);
-                int actwidth = System.Math.Min(Screen.currentResolution.width, Screen.currentResolution.height);
-                float scalefactor = ((float)actwidth / 1440.0f);
-                i -= (int)(MenuItem.GetComponent<RectTransform>().rect.height * scalefactor);
-                i -= 10;
-            }
-        }
-    }
 
     internal MenuButton GetMenu(string v)
     {

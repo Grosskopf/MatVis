@@ -10,11 +10,11 @@ public class Findschnittpunkt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        double d = Vector3.Dot(Ebene.up, Ebene.position);//d aus ebenengleichung
-        Vector3 n = Ebene.up;//normale aus ebenengleichung
+        double d = Vector3.Dot(Ebene.parent.InverseTransformDirection(Ebene.up), Ebene.position);//d aus ebenengleichung
+        Vector3 n = Ebene.parent.InverseTransformDirection(Ebene.up);//normale aus ebenengleichung
 
         Vector3 pos = Gerade.position;//position der geraden
-        Vector3 dir = Gerade.forward;//richtung der geraden
+        Vector3 dir = Gerade.parent.InverseTransformDirection(Gerade.forward);//richtung der geraden
         //(pos.x + a * dir.x)=x1
         //(pos.y + a * dir.y)=x2
         //(pos.z + a * dir.z)=x3
@@ -28,13 +28,13 @@ public class Findschnittpunkt : MonoBehaviour
         {
             Vector3 PointPos= pos - dir * (float) ((Vector3.Dot(n, pos) - d) / Vector3.Dot(n, dir));
             transform.position = PointPos;
-            GetComponent<MeshRenderer>().enabled = true;
-            GetComponent<SphereCollider>().enabled = true;
+            GetComponentInChildren<MeshRenderer>().enabled = true;
+            GetComponentInChildren<SphereCollider>().enabled = true;
         }
         else
         {
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<SphereCollider>().enabled = false;
+            GetComponentInChildren<MeshRenderer>().enabled = false;
+            GetComponentInChildren<SphereCollider>().enabled = false;
         }
     }
 }

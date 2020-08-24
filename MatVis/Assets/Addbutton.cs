@@ -36,11 +36,11 @@ public class Addbutton : MonoBehaviour
         {
             case "Ebene":
                 rawImage.enabled = true;
-                rawImage.texture = GeradenIcon;
+                rawImage.texture = EbenenIcon;
                 break;
             case "Gerade":
                 rawImage.enabled = true;
-                rawImage.texture = EbenenIcon;
+                rawImage.texture = GeradenIcon;
                 break;
             case "Punkt":
                 rawImage.enabled = true;
