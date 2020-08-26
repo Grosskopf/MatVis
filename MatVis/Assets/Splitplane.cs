@@ -258,7 +258,7 @@ public class Splitplane : MonoBehaviour
 
 
         }
-
+        /*
         for (int angle = 0; angle < 3; angle++)
         {
 
@@ -483,22 +483,22 @@ public class Splitplane : MonoBehaviour
                             Part1Vectors.Add(vertices_split[i][j]);
                         }
                     }
-                    vertices_split[i] = Part1Vectors;
+                    vertices_split[i] = Part1Vectors;*/
                     /*for(int j=0; j < Part1Vectors.Count; j++)
                     {
                         Debug.Log("Part1Vector " + Part1Vectors[j]);
-                    }*/
+                    }*//*
                     vertices_split.Insert(i + 1, Part2Vectors);
-                    /*for (int j = 0; j < Part1Vectors.Count; j++)
+                    *//*for (int j = 0; j < Part1Vectors.Count; j++)
                     {
                         Debug.Log("Part2Vector " + Part1Vectors[j]);
-                    }*/
+                    }*//*
                 }
                 i++;
                 i++;
             }
             }
-        }
+        }*/
         for (int i=0; i < vertices_split.Count; i++)
         {
             Mesh meshI = new Mesh();
